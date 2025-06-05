@@ -1,2 +1,0 @@
-{"level":"info","message":"Сервер запущен на порту 3000","service":"proxy-server","timestamp":"05.06.2025 14:54:23"}
-{"level":"info","message":"Для просмотра логов перейдите по адресу: http://localhost:3000/logs","service":"proxy-server","timestamp":"05.06.2025 14:54:23"}
