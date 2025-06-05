@@ -14,3 +14,5 @@
 {"level":"info","message":"Для просмотра логов перейдите по адресу: http://127.0.0.1:3000/logs","service":"proxy-server","timestamp":"05.06.2025 16:10:44"}
 {"level":"info","message":"Сервер запущен на 127.0.0.1:3000","service":"proxy-server","timestamp":"05.06.2025 16:21:30"}
 {"level":"info","message":"Для просмотра логов перейдите по адресу: http://127.0.0.1:3000/logs","service":"proxy-server","timestamp":"05.06.2025 16:21:30"}
+{"level":"info","message":"Сервер запущен на 127.0.0.1:3000","service":"proxy-server","timestamp":"05.06.2025 17:35:02"}
+{"level":"info","message":"Для просмотра логов перейдите по адресу: http://127.0.0.1:3000/logs","service":"proxy-server","timestamp":"05.06.2025 17:35:02"}
