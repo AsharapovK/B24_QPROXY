@@ -38,4 +38,8 @@ node_modules/
 .idea/
 .vscode/
 *.swp
-*.swo 
+*.swo
+
+# Prettier configuration
+.prettierrc 
+app.log

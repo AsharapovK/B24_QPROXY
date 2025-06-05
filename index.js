@@ -9,14 +9,7 @@ import logsRouter from "./routes/logs.js";
 import { createRequire } from "module";
 import fs from "fs";
 const require = createRequire(import.meta.url);
-const {
-  PROXY_PORT,
-  SERVER_IP,
-  TARGET_BASE_URL,
-  REQUEST_TIMEOUT,
-  MAX_RETRIES,
-  MAX_CONCURRENCY,
-} = require("./config/proxy-config.cjs");
+const { PROXY_PORT, SERVER_IP, TARGET_BASE_URL, REQUEST_TIMEOUT, MAX_RETRIES, MAX_CONCURRENCY } = require("./config/proxy-config.cjs");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -54,38 +47,24 @@ async function sendWithRetries(url, retries = MAX_RETRIES) {
         }
       );
 
-      logger.info(
-        `Запрос с ID:${dealId} вернулся   | Попытка: ${attempt} | Код:${
-          response.status
-        } ${JSON.stringify(response.data)}`
-      );
+      logger.info(`Запрос с ID:${dealId} вернулся   | Попытка: ${attempt} | Код:${response.status} ${JSON.stringify(response.data)}`);
 
       clearTimeout(timeout);
 
       if (response.status === 200) {
-        logger.info(
-          `Запрос с ID:${dealId} успешный   | Попытка: ${attempt} | Очередь: ${queue.size}`
-        );
-        logger.info(
-          "----------------------------------------------------------------------------------------"
-        );
+        logger.info(`Запрос с ID:${dealId} успешный   | Попытка: ${attempt} | Очередь: ${queue.size}`);
+        logger.info("----------------------------------------------------------------------------------------");
 
         return;
       } else {
-        logger.warn(
-          `⚠️ Попытка запроса с ID:${dealId} #${attempt}. Очередь: ${queue.size}. Статус: ${response.status}`
-        );
+        logger.warn(`⚠️ Попытка запроса с ID:${dealId} #${attempt}. Очередь: ${queue.size}. Статус: ${response.status}`);
       }
     } catch (err) {
-      logger.error(
-        `⚠️  Ошибка запроса с ID:${dealId} | Попытка: ${attempt} | Статус: ${err.message}`
-      );
+      logger.error(`⚠️  Ошибка запроса с ID:${dealId} | Попытка: ${attempt} | Статус: ${err.message}`);
     }
   }
 
-  logger.error(
-    `❌ Лимит запросов для ID:${dealId} превышен | Очередь: ${queue.size} | Запрос не будет отправлен`
-  );
+  logger.error(`❌ Лимит запросов для ID:${dealId} превышен | Очередь: ${queue.size} | Запрос не будет отправлен`);
 }
 
 // Мидлвары
@@ -159,16 +138,11 @@ app.get("/api/request-stats", (req, res) => {
       }
     });
 
-    const hours = Array.from(
-      { length: 24 },
-      (_, i) => `${i.toString().padStart(2, "0")}:00`
-    );
+    const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, "0")}:00`);
     res.json({ success: true, hours, counts: hourlyCounts });
   } catch (error) {
     logger.error("Ошибка при обработке лога:", error);
-    res
-      .status(500)
-      .json({ success: false, error: "Не удалось обработать лог" });
+    res.status(500).json({ success: false, error: "Не удалось обработать лог" });
   }
 });
 
@@ -184,9 +158,7 @@ app.use((err, req, res, next) => {
 // Запуск сервера!
 app.listen(PORT, IP, () => {
   logger.info(`Сервер запущен на ${IP}:${PORT}`);
-  logger.info(
-    `Для просмотра логов перейдите по адресу: http://${IP}:${PORT}/logs`
-  );
+  logger.info(`Для просмотра логов перейдите по адресу: http://${IP}:${PORT}/logs`);
 });
 
 export default app;
