@@ -1,0 +1,32 @@
+{"level":"info","message":"➕ Добавлен запрос с ID:38922 в очередь #1","service":"proxy-server","timestamp":"05.06.2025 18:37:46"}
+{"level":"info","message":"Запрос с ID:38922 отправлен  | Попытка: 1","service":"proxy-server","timestamp":"05.06.2025 18:37:46"}
+{"level":"info","message":"➕ Добавлен запрос с ID:38922 в очередь #1","service":"proxy-server","timestamp":"05.06.2025 18:37:46"}
+{"level":"info","message":"➕ Добавлен запрос с ID:38922 в очередь #2","service":"proxy-server","timestamp":"05.06.2025 18:37:47"}
+{"level":"info","message":"➕ Добавлен запрос с ID:38922 в очередь #3","service":"proxy-server","timestamp":"05.06.2025 18:37:48"}
+{"level":"info","message":"➕ Добавлен запрос с ID:38922 в очередь #4","service":"proxy-server","timestamp":"05.06.2025 18:37:49"}
+{"level":"info","message":"➕ Добавлен запрос с ID:38922 в очередь #5","service":"proxy-server","timestamp":"05.06.2025 18:37:50"}
+{"level":"info","message":"Запрос с ID:38922 вернулся   | Попытка: 1 | Код:200 \"Данные успешно записаны в таблицу\"","service":"proxy-server","timestamp":"05.06.2025 18:37:52"}
+{"level":"info","message":"Запрос с ID:38922 успешный   | Попытка: 1 | Очередь: 5","service":"proxy-server","timestamp":"05.06.2025 18:37:52"}
+{"level":"info","message":"----------------------------------------------------------------------------------------","service":"proxy-server","timestamp":"05.06.2025 18:37:52"}
+{"level":"info","message":"Запрос с ID:38922 отправлен  | Попытка: 1","service":"proxy-server","timestamp":"05.06.2025 18:37:52"}
+{"level":"info","message":"Запрос с ID:38922 вернулся   | Попытка: 1 | Код:200 \"Данные успешно записаны в таблицу\"","service":"proxy-server","timestamp":"05.06.2025 18:38:03"}
+{"level":"info","message":"Запрос с ID:38922 успешный   | Попытка: 1 | Очередь: 4","service":"proxy-server","timestamp":"05.06.2025 18:38:03"}
+{"level":"info","message":"----------------------------------------------------------------------------------------","service":"proxy-server","timestamp":"05.06.2025 18:38:03"}
+{"level":"info","message":"Запрос с ID:38922 отправлен  | Попытка: 1","service":"proxy-server","timestamp":"05.06.2025 18:38:03"}
+{"level":"info","message":"Запрос с ID:38922 вернулся   | Попытка: 1 | Код:200 \"Данные успешно записаны в таблицу\"","service":"proxy-server","timestamp":"05.06.2025 18:38:12"}
+{"level":"info","message":"Запрос с ID:38922 успешный   | Попытка: 1 | Очередь: 3","service":"proxy-server","timestamp":"05.06.2025 18:38:12"}
+{"level":"info","message":"----------------------------------------------------------------------------------------","service":"proxy-server","timestamp":"05.06.2025 18:38:12"}
+{"level":"info","message":"Запрос с ID:38922 отправлен  | Попытка: 1","service":"proxy-server","timestamp":"05.06.2025 18:38:12"}
+{"level":"info","message":"Запрос с ID:38922 вернулся   | Попытка: 1 | Код:200 \"Данные успешно записаны в таблицу\"","service":"proxy-server","timestamp":"05.06.2025 18:38:24"}
+{"level":"info","message":"Запрос с ID:38922 успешный   | Попытка: 1 | Очередь: 2","service":"proxy-server","timestamp":"05.06.2025 18:38:24"}
+{"level":"info","message":"----------------------------------------------------------------------------------------","service":"proxy-server","timestamp":"05.06.2025 18:38:24"}
+{"level":"info","message":"Запрос с ID:38922 отправлен  | Попытка: 1","service":"proxy-server","timestamp":"05.06.2025 18:38:24"}
+{"level":"info","message":"Запрос с ID:38922 вернулся   | Попытка: 1 | Код:200 \"Данные успешно записаны в таблицу\"","service":"proxy-server","timestamp":"05.06.2025 18:38:33"}
+{"level":"info","message":"Запрос с ID:38922 успешный   | Попытка: 1 | Очередь: 1","service":"proxy-server","timestamp":"05.06.2025 18:38:33"}
+{"level":"info","message":"----------------------------------------------------------------------------------------","service":"proxy-server","timestamp":"05.06.2025 18:38:33"}
+{"level":"info","message":"Запрос с ID:38922 отправлен  | Попытка: 1","service":"proxy-server","timestamp":"05.06.2025 18:38:33"}
+{"level":"info","message":"Запрос с ID:38922 вернулся   | Попытка: 1 | Код:200 \"Данные успешно записаны в таблицу\"","service":"proxy-server","timestamp":"05.06.2025 18:38:40"}
+{"level":"info","message":"Запрос с ID:38922 успешный   | Попытка: 1 | Очередь: 0","service":"proxy-server","timestamp":"05.06.2025 18:38:40"}
+{"level":"info","message":"----------------------------------------------------------------------------------------","service":"proxy-server","timestamp":"05.06.2025 18:38:40"}
+{"level":"info","message":"Сервер запущен на 127.0.0.1:3000","service":"proxy-server","timestamp":"05.06.2025 18:41:04"}
+{"level":"info","message":"Для просмотра логов перейдите по адресу: http://127.0.0.1:3000/logs","service":"proxy-server","timestamp":"05.06.2025 18:41:04"}
