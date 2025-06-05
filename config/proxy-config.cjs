@@ -5,7 +5,7 @@ module.exports = {
 
   // IP на который отправляются запросы из очереди
   TARGET_BASE_URL:
-    "https://script.google.com/macros/s/AKfycbzu-3bcJI4L8gXdgYSqPhnp2HrtYO9S8MGZUPV18v4OEBf5pAYHRyCaSeUBWN6TJFR_/exec",
+    "your_url",
 
   // Таймаут запроса
   REQUEST_TIMEOUT: 70000,
