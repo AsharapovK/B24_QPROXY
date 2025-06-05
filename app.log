@@ -1,18 +1,2 @@
 {"level":"info","message":"Сервер запущен на порту 3000","service":"proxy-server","timestamp":"05.06.2025 14:54:23"}
 {"level":"info","message":"Для просмотра логов перейдите по адресу: http://localhost:3000/logs","service":"proxy-server","timestamp":"05.06.2025 14:54:23"}
-{"level":"info","message":"Сервер запущен на порту 3000","service":"proxy-server","timestamp":"05.06.2025 14:54:48"}
-{"level":"info","message":"Для просмотра логов перейдите по адресу: http://localhost:3000/logs","service":"proxy-server","timestamp":"05.06.2025 14:54:48"}
-{"level":"info","message":"Сервер запущен на порту 3000","service":"proxy-server","timestamp":"05.06.2025 14:55:06"}
-{"level":"info","message":"Для просмотра логов перейдите по адресу: http://localhost:3000/logs","service":"proxy-server","timestamp":"05.06.2025 14:55:06"}
-{"level":"info","message":"Сервер запущен на порту 3000","service":"proxy-server","timestamp":"05.06.2025 15:58:18"}
-{"level":"info","message":"Для просмотра логов перейдите по адресу: http://localhost:3000/logs","service":"proxy-server","timestamp":"05.06.2025 15:58:18"}
-{"level":"info","message":"Сервер запущен на 127.0.0.1:3000","service":"proxy-server","timestamp":"05.06.2025 16:08:50"}
-{"level":"info","message":"Для просмотра логов перейдите по адресу: http://127.0.0.1:3000/logs","service":"proxy-server","timestamp":"05.06.2025 16:08:50"}
-{"level":"info","message":"Сервер запущен на 127.0.0.1:3000","service":"proxy-server","timestamp":"05.06.2025 16:09:42"}
-{"level":"info","message":"Для просмотра логов перейдите по адресу: http://127.0.0.1:3000/logs","service":"proxy-server","timestamp":"05.06.2025 16:09:42"}
-{"level":"info","message":"Сервер запущен на 127.0.0.1:3000","service":"proxy-server","timestamp":"05.06.2025 16:10:44"}
-{"level":"info","message":"Для просмотра логов перейдите по адресу: http://127.0.0.1:3000/logs","service":"proxy-server","timestamp":"05.06.2025 16:10:44"}
-{"level":"info","message":"Сервер запущен на 127.0.0.1:3000","service":"proxy-server","timestamp":"05.06.2025 16:21:30"}
-{"level":"info","message":"Для просмотра логов перейдите по адресу: http://127.0.0.1:3000/logs","service":"proxy-server","timestamp":"05.06.2025 16:21:30"}
-{"level":"info","message":"Сервер запущен на 127.0.0.1:3000","service":"proxy-server","timestamp":"05.06.2025 17:35:02"}
-{"level":"info","message":"Для просмотра логов перейдите по адресу: http://127.0.0.1:3000/logs","service":"proxy-server","timestamp":"05.06.2025 17:35:02"}
