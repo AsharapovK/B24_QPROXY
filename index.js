@@ -9,7 +9,7 @@ import logsRouter from "./routes/logs.js";
 import { createRequire } from "module";
 import fs from "fs";
 const require = createRequire(import.meta.url);
-const { PROXY_PORT, SERVER_IP, TARGET_BASE_URL, REQUEST_TIMEOUT, MAX_RETRIES, MAX_CONCURRENCY } = require("./config/proxy-config.cjs");
+const { PROXY_PORT, SERVER_IP, TARGET_BASE_URL, TARGET_BASE_URL_INVOICE, REQUEST_TIMEOUT, MAX_RETRIES, MAX_CONCURRENCY } = require("./config/proxy-config.cjs");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,7 +27,8 @@ export const requestQueue = queue;
 // Функция с повторами и таймаутом
 async function sendWithRetries(url, retries = MAX_RETRIES) {
   const urlObj = new URL(url);
-  const dealId = urlObj.searchParams.get("DealID") || urlObj.searchParams.get("s5") || "неизвестен";
+  const dealIdParam = urlObj.searchParams.get("DealID") || urlObj.searchParams.get("s5");
+  const dealId = dealIdParam || "неизвестен";
 
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
@@ -95,10 +96,17 @@ app.get("/api/queue", (req, res) => {
 // Обработка входящего запроса
 app.post("/proxy", (req, res) => {
   const fullQuery = req.originalUrl.split("?")[1] || "";
-  const targetUrl = `${TARGET_BASE_URL}?${fullQuery}`;
+  const urlObj = new URL(`http://dummy?${fullQuery}`);
+  const s5Param = urlObj.searchParams.get("s5");
+  const dealId = urlObj.searchParams.get("DealID") || s5Param || "неизвестен";
 
-  const urlObj = new URL(targetUrl);
-  const dealId = urlObj.searchParams.get("DealID") || "неизвестен";
+  // Выбираем целевой URL на основе параметров
+  const baseUrl = s5Param ? TARGET_BASE_URL_INVOICE : TARGET_BASE_URL;
+  const targetUrl = `${baseUrl}?${fullQuery}`;
+
+  if (s5Param) {
+    logger.info(`апрос будет отправлен в таблицу "Логи счетов"`);
+  }
 
   logger.info(`➕ Добавлен запрос с ID:${dealId} в очередь #${queue.size + 1}`);
   queue.add(() => sendWithRetries(targetUrl));
@@ -109,6 +117,7 @@ app.post("/proxy", (req, res) => {
     dealId: dealId,
     queuePosition: queue.size,
     activeRequests: queue.pending,
+    target: s5Param ? "invoice" : "default",
   });
 });
 
