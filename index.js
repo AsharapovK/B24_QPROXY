@@ -27,7 +27,7 @@ export const requestQueue = queue;
 // Функция с повторами и таймаутом
 async function sendWithRetries(url, retries = MAX_RETRIES) {
   const urlObj = new URL(url);
-  const dealId = urlObj.searchParams.get("DealID") || "неизвестен";
+  const dealId = urlObj.searchParams.get("DealID") || urlObj.searchParams.get("s5") || "неизвестен";
 
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
