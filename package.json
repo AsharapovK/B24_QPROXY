@@ -9,15 +9,18 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "axios": "^1.6.2",
-    "body-parser": "^1.20.2",
-    "express": "^4.18.2",
-    "moment-timezone": "^0.6.0",
+    "axios": "^1.6.7",
+    "body-parser": "^1.20.3",
+    "express": "^4.18.3",
+    "moment-timezone": "^0.5.46",
     "p-queue": "^8.1.0",
-    "vue-virtual-scroller": "^2.0.0-beta.8",
-    "winston": "^3.17.0"
+    "winston": "^3.13.0",
+    "ws": "^8.18.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.1.0"
+  },
+  "overrides": {
+    "glob": "^10.3.10"
   }
 }

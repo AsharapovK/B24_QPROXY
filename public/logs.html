@@ -2,7 +2,10 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Логи сервера</title>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -12,51 +15,73 @@
       href="https://cdn.jsdelivr.net/npm/material-components-web@14.0.0/dist/material-components-web.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
-    <style></style>
+    <link
+      rel="stylesheet"
+      href="/styles.css"
+    />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
   </head>
 
   <body>
-    <div class="container" id="app">
-      <div class="header">
-        <h1>Логи сервера</h1>
-        <button
-          @click="refreshLogs"
-          class="mdc-button mdc-button--raised"
-          style="--mdc-theme-primary: #6200ee"
-        >
-          <span class="mdc-button__label">Обновить</span>
-          <i class="material-icons mdc-button__icon" aria-hidden="true"
-            >refresh</i
-          >
-        </button>
-      </div>
+    <div id="app">
+      <nav class="nav-menu">
+        <ul>
+          <li>
+            <a
+              href="/"
+              :class="{ active: currentPage === 'logs' }"
+              @click.prevent="navigate('logs')"
+            >
+              <i class="material-icons">list_alt</i>
+              Логи
+            </a>
+          </li>
+          <li>
+            <a
+              href="/chart"
+              :class="{ active: currentPage === 'chart' }"
+              @click.prevent="navigate('chart')"
+            >
+              <i class="material-icons">bar_chart</i>
+              Статистика
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-      <div class="mdc-card card-elevated">
-        <div class="mdc-card__content">
-          <div class="queue-status">
-            <h3 class="mdc-typography--headline5">Текущая очередь</h3>
+      <div>
+        <div>
+          <div class="filters">
+            <button @click="refreshLogs">
+              <span>Обновить</span>
+            </button>
+            <!-- <h4>Текущая очередь</h4> -->
             <div
               v-if="queueInfo.size === 0"
-              class="mdc-typography--body1 text-muted"
+              class="text-muted"
             >
               Очередь пуста
             </div>
-            <div v-else class="queue-details">
+            <div
+              v-else
+              class="queue-details"
+            >
               <div class="mdc-typography--body1 queue-stat">
                 <span
                   class="material-icons mdc-list-item__graphic"
                   aria-hidden="true"
                   >list_alt</span
                 >
-                <span
-                  >Всего в очереди: <strong>{{ queueInfo.size }}</strong></span
-                >
+                <span>Всего в очереди: <strong>{{ queueInfo.size }}</strong></span>
               </div>
               <div class="mdc-typography--body1 queue-stat">
                 <span
@@ -64,9 +89,7 @@
                   aria-hidden="true"
                   >hourglass_top</span
                 >
-                <span
-                  >Выполняется: <strong>{{ queueInfo.pending }}</strong></span
-                >
+                <span>Выполняется: <strong>{{ queueInfo.pending }}</strong></span>
               </div>
               <div
                 v-if="queueInfo.queue && queueInfo.queue.length > 0"
@@ -80,12 +103,8 @@
                     class="mdc-list-item queue-item"
                   >
                     <span class="mdc-list-item__text">
-                      <span class="mdc-list-item__primary-text"
-                        >#{{ item.id }}</span
-                      >
-                      <span class="mdc-list-item__secondary-text"
-                        >{{ item.status }}</span
-                      >
+                      <span class="mdc-list-item__primary-text">#{{ item.id }}</span>
+                      <span class="mdc-list-item__secondary-text">{{ item.status }}</span>
                     </span>
                   </li>
                 </ul>
@@ -95,7 +114,10 @@
         </div>
       </div>
 
-      <div v-if="loading" class="text-center py-5">
+      <div
+        v-if="loading"
+        class="text-center py-5"
+      >
         <div
           class="mdc-circular-progress mdc-circular-progress--indeterminate"
           role="progressbar"
@@ -123,9 +145,7 @@
             </svg>
           </div>
           <div class="mdc-circular-progress__indeterminate-container">
-            <div
-              class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left"
-            >
+            <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">
               <svg
                 class="mdc-circular-progress__indeterminate-circle-graphic"
                 viewBox="0 0 48 48"
@@ -157,9 +177,7 @@
                 />
               </svg>
             </div>
-            <div
-              class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right"
-            >
+            <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right">
               <svg
                 class="mdc-circular-progress__indeterminate-circle-graphic"
                 viewBox="0 0 48 48"
@@ -179,23 +197,31 @@
         </div>
       </div>
 
-      <div v-else class="logs-container">
-        <div v-if="logs.length === 0" class="alert alert-info">
+      <div
+        v-else
+        class="logs-container"
+      >
+        <div
+          v-if="logs.length === 0"
+          class="alert alert-info"
+        >
           Логи отсутствуют
         </div>
         <div v-else>
-          <div class="mb-3">
-            Показано {{ logs.length }} из {{ logInfo.total }} записей
-          </div>
+          <div class="mb-3">Показано {{ logs.length }} из {{ logInfo.total }} записей</div>
           <div
             v-for="(log, index) in logs"
             :key="index"
             class="log-entry"
             :class="'log-' + (log.level || 'info') + (log.isNew ? ' new-entry' : '')"
           >
-            <strong>{{ log.timestamp }}</strong> [{{ (log.level ||
-            'info').toUpperCase() }}]: {{ log.message || log }}
-            <div v-if="log.stack" class="text-danger">{{ log.stack }}</div>
+            <strong>{{ log.timestamp }}</strong> [{{ (log.level || 'info').toUpperCase() }}]: {{ log.message || log }}
+            <div
+              v-if="log.stack"
+              class="text-danger"
+            >
+              {{ log.stack }}
+            </div>
           </div>
         </div>
       </div>
@@ -220,14 +246,20 @@
             pending: 0,
             queue: [],
           });
+          const startDate = ref("");
+          const endDate = ref("");
+          const stats = ref({
+            totalRequests: 0,
+            errors: 0,
+            retries: 0,
+          });
+          const currentPage = ref("logs");
 
           const markExistingEntries = (entries) => {
             return entries.map((entry) => ({
               ...entry,
               isNew: false,
-              id:
-                entry.id ||
-                Date.now() + Math.random().toString(36).substr(2, 9),
+              id: entry.id || Date.now() + Math.random().toString(36).substr(2, 9),
             }));
           };
 
@@ -238,9 +270,7 @@
               return {
                 ...entry,
                 isNew,
-                id:
-                  entry.id ||
-                  Date.now() + Math.random().toString(36).substr(2, 9),
+                id: entry.id || Date.now() + Math.random().toString(36).substr(2, 9),
               };
             });
           };
@@ -284,18 +314,73 @@
             }
           };
 
+          const fetchStats = async () => {
+            try {
+              const response = await axios.get("/api/request-stats-detailed", {
+                params: {
+                  startDate: startDate.value,
+                  endDate: endDate.value,
+                },
+              });
+              if (response.data.success) {
+                stats.value = response.data.stats;
+              }
+            } catch (error) {
+              console.error("Ошибка при получении статистики:", error);
+            }
+          };
+
           const refreshAll = () => {
             fetchLogs();
             fetchQueue();
+            fetchStats();
           };
 
-          onMounted(() => {
-            refreshAll();
-            // Обновляем логи каждые 5 секунд
-            const intervalId = setInterval(fetchLogs, 30000);
+          const navigate = (page) => {
+            currentPage.value = page;
+            if (page === "chart") {
+              window.location.href = "/chart";
+            }
+          };
 
-            // Очищаем интервал при размонтировании компонента
-            return () => clearInterval(intervalId);
+          // Подключение к WebSocket серверу
+          const connectWebSocket = () => {
+            const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+            const wsUrl = `${protocol}${window.location.host}`;
+            
+            const ws = new WebSocket(wsUrl);
+            
+            ws.onopen = () => {
+              console.log('WebSocket соединение установлено');
+            };
+            
+            ws.onmessage = (event) => {
+              const data = JSON.parse(event.data);
+              if (data.type === 'logs_updated') {
+                console.log('Получено уведомление об обновлении логов');
+                fetchLogs();
+              }
+            };
+            
+            ws.onclose = () => {
+              console.log('WebSocket соединение закрыто, переподключение через 5 секунд...');
+              setTimeout(connectWebSocket, 5000);
+            };
+            
+            ws.onerror = (error) => {
+              console.error('WebSocket ошибка:', error);
+              ws.close();
+            };
+            
+            return ws;
+          };
+          
+          onMounted(() => {
+            // Загружаем логи при загрузке страницы
+            refreshAll();
+            
+            // Устанавливаем соединение с WebSocket сервером
+            connectWebSocket();
           });
 
           return {
@@ -303,7 +388,13 @@
             loading,
             logInfo,
             queueInfo,
+            startDate,
+            endDate,
+            stats,
+            fetchStats,
             refreshLogs: refreshAll,
+            currentPage,
+            navigate,
           };
         },
       }).mount("#app");

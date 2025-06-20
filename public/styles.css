@@ -1,209 +1,210 @@
+/* ==========================================================================
+   Основные стили
+   ========================================================================== */
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   margin: 0;
-  background-color: #fff;
+  padding: 20px;
+  background-color: #f8f9fa;
+  background-image: url("https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=2029&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
-.container {
+/* ==========================================================================
+   Контейнеры для контента
+   ========================================================================== */
+.chart-container,
+.logs-container {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.mdc-card {
-  margin: 20px 0;
-  background-color: #f9f9f9;
-  box-shadow: none;
-  border: 1px solid #e0e0e0;
-}
-
-/* Стили для контейнера логов */
-.logs-container {
-  max-height: 70vh;
-  overflow-y: auto;
-  margin: 20px 0;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-}
-
-.mb-3 {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
-  font-size: 13px;
-  color: #666;
-  font-weight: 500;
-}
-
-.log-entry {
-  padding: 12px 16px;
-  border-bottom: 1px solid #e0e0e0;
-  transition: background-color 0.2s;
-  font-family: "Roboto Mono", monospace;
-  font-size: 13px;
-  line-height: 1.5;
-  margin: 5px 0 5px 0;
-}
-
-.log-entry:last-child {
-  border-bottom: none;
-}
-
-.log-entry:hover {
-  background-color: #d5e2f8;
-}
-
-.log-info {
-  border-left: 3px solid #4285f4;
-  background-color: #e8f0fe;
-}
-
-.log-error {
-  border-left: 3px solid #ea4335;
-  background-color: #fce8e6;
-}
-
-.log-warn {
-  border-left: 3px solid #fbbc05;
-  background-color: #fef7e0;
-}
-
-h1 {
-  color: #3f3f3f;
-  margin: 16px 0;
-  font-weight: 500;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 0;
-}
-
-h4 {
-  font-weight: 500;
+/* ==========================================================================
+   Навигация
+   ========================================================================== */
+.nav-menu {
+  background: rgba(245, 245, 245, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px 20px;
   margin-bottom: 20px;
-  font-size: 17px;
-}
-
-.queue-status {
-  padding: 16px;
-}
-
-.queue-item {
-  margin-bottom: 10px;
-  padding: 10px 15px;
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-}
-
-.queue-item:last-child {
-  border-bottom: none;
-}
-
-.btn {
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 15px;
-  letter-spacing: 0.2px;
-  transition: all 0.2s ease;
-}
-
-.btn-primary {
-  background-color: #0071e3;
-  border: none;
-}
-
-.btn-primary:hover {
-  background-color: #0077ed;
-  transform: translateY(-1px);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.alert {
-  border-radius: 12px;
-  padding: 20px;
-  border: none;
-}
-
-.text-danger {
-  color: #ff3b30;
-}
-
-.spinner-grow {
-  width: 28px;
-  height: 28px;
-}
-
-/* Анимация для новых записей */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.log-entry.new-entry {
-  animation: fadeIn 1.5s ease-out forwards;
-  background-color: rgba(98, 0, 238, 0.05);
-  transition: background-color 1.5s ease-out;
-}
-
-.log-entry.new-entry.updated {
-  background-color: transparent;
-}
-
-.card-elevated {
-  margin: 16px 0;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 20px auto;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-.queue-details {
-  margin-top: 12px;
+.nav-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
 }
 
-.queue-stat {
+.nav-menu a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 0;
 }
 
-.queue-items {
-  margin-top: 16px;
+.nav-menu a:hover {
+  background: rgba(0, 0, 0, 0.05);
 }
 
-.queue-item {
-  margin: 4px 0;
+.nav-menu a.active {
+  background: #4caf50;
+  color: white;
 }
 
-.mdc-list-item__graphic {
-  color: #6200ee;
-  font-size: 20px;
+/* ==========================================================================
+   Стили для логов
+   ========================================================================== */
+.log-entry {
+  background: rgb(255 255 255 / 33%);
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: #333;
 }
 
-.text-muted {
-  color: #757575;
+.log-entry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.new-entry {
-  animation: new-entry 1s;
+.log-entry.log-info {
+  border-left: 4px solid #2196f3;
 }
 
-@keyframes new-entry {
-  0% {
-    background-color: #cff6cf;
+.log-entry.log-error {
+  border-left: 4px solid #ff6384;
+  background-color: #e1cad8;
+}
+
+.log-entry.log-warn {
+  border-left: 4px solid #72c9cc;
+  background-color: #bcdee4;
+}
+
+/* ==========================================================================
+   Фильтры и статистика
+   ========================================================================== */
+.filters {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(245, 245, 245, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 8px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.filters input[type="date"] {
+  width: 150px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.filters input[type="date"]:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.filters button {
+  width: 150px;
+  padding: 8px 16px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filters button:hover {
+  background: #45a049;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filters button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   Адаптивность
+   ========================================================================== */
+@media (max-width: 768px) {
+  body {
+    font-size: 13px;
   }
 
-  100% {
-    background-color: #fff;
+  .nav-menu a {
+    font-size: 13px;
+  }
+
+  .log-entry {
+    font-size: 13px;
+  }
+
+  .filters input[type="date"],
+  .filters button {
+    font-size: 13px;
+  }
+
+  .chart-container,
+  .logs-container {
+    padding: 15px;
+    margin: 10px auto;
   }
 }

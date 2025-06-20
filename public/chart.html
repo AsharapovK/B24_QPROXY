@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>График запросов</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="/styles.css"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <nav class="nav-menu">
+        <ul>
+          <li>
+            <a
+              href="/"
+              :class="{ active: currentPage === 'logs' }"
+              @click.prevent="navigate('logs')"
+            >
+              <i class="material-icons">list_alt</i>
+              Логи
+            </a>
+          </li>
+          <li>
+            <a
+              href="/chart"
+              :class="{ active: currentPage === 'chart' }"
+              @click.prevent="navigate('chart')"
+            >
+              <i class="material-icons">bar_chart</i>
+              Статистика
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="filters">
+        <input
+          type="date"
+          id="startDate"
+        />
+        <input
+          type="date"
+          id="endDate"
+        />
+        <button onclick="fetchDataAndRenderChart()">Применить</button>
+      </div>
+      <div class="chart-container">
+        <canvas id="requestChart"></canvas>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.4.0/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref, onMounted } = Vue;
+
+      const app = createApp({
+        setup() {
+          const currentPage = ref("chart");
+
+          const navigate = (page) => {
+            currentPage.value = page;
+            if (page === "logs") {
+              window.location.href = "/logs";
+            }
+          };
+
+          onMounted(() => {
+            const path = window.location.pathname;
+            if (path.includes("chart")) {
+              currentPage.value = "chart";
+            } else {
+              currentPage.value = "logs";
+            }
+          });
+
+          return {
+            currentPage,
+            navigate,
+          };
+        },
+      });
+
+      app.mount("#app");
+
+      const API_URL = "/api/request-stats-detailed";
+      let chart = null;
+
+      async function fetchDataAndRenderChart() {
+        try {
+          const startDate = document.getElementById("startDate").value;
+          const endDate = document.getElementById("endDate").value;
+
+          if (startDate && endDate) {
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            if (start > end) {
+              alert("Дата начала не может быть позже даты окончания");
+              return;
+            }
+          }
+
+          const response = await fetch(`${API_URL}?startDate=${startDate}&endDate=${endDate}`);
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.details || `HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          if (data.success) {
+            const ctx = document.getElementById("requestChart").getContext("2d");
+
+            if (chart) {
+              chart.destroy();
+            }
+
+            const hasData = data.requests.some((count) => count > 0) || data.errors.some((count) => count > 0);
+
+            if (!hasData) {
+              alert("Нет данных за выбранный период");
+              return;
+            }
+
+            chart = new Chart(ctx, {
+              type: "bar",
+              data: {
+                labels: data.hours,
+                datasets: [
+                  {
+                    label: "Всего запросов",
+                    data: data.requests,
+                    backgroundColor: "rgba(75, 192, 192, 0.2)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    borderWidth: 1,
+                  },
+                  {
+                    label: "Ошибки",
+                    data: data.errors,
+                    backgroundColor: "rgba(255, 99, 132, 0.2)",
+                    borderColor: "rgba(255, 99, 132, 1)",
+                    borderWidth: 1,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    title: { display: true, text: "Количество запросов" },
+                    stacked: true,
+                  },
+                  x: {
+                    title: { display: true, text: "Время (часы)" },
+                    stacked: true,
+                  },
+                },
+                plugins: {
+                  tooltip: {
+                    callbacks: {
+                      label: function (context) {
+                        const label = context.dataset.label || "";
+                        const value = context.raw;
+                        return `${label}: ${value}`;
+                      },
+                    },
+                  },
+                },
+              },
+            });
+          } else {
+            throw new Error(data.error || "Неизвестная ошибка");
+          }
+        } catch (error) {
+          console.error("Ошибка при запросе данных:", error);
+          alert(`Ошибка: ${error.message}`);
+        }
+      }
+
+      function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const today = new Date();
+        const startDateInput = document.getElementById("startDate");
+        const endDateInput = document.getElementById("endDate");
+        
+        // Устанавливаем сегодняшнюю дату в оба поля
+        const todayFormatted = formatDate(today);
+        startDateInput.value = todayFormatted;
+        endDateInput.value = todayFormatted;
+        
+        // Устанавливаем минимальную и максимальную даты, чтобы нельзя было выбрать дату в будущем
+        startDateInput.max = todayFormatted;
+        endDateInput.max = todayFormatted;
+        
+        // Обновляем максимальную дату для начальной даты при изменении конечной даты
+        endDateInput.addEventListener('change', function() {
+          startDateInput.max = this.value;
+        });
+        
+        // Обновляем минимальную дату для конечной даты при изменении начальной даты
+        startDateInput.addEventListener('change', function() {
+          endDateInput.min = this.value;
+        });
+
+        // Загружаем данные для графика при загрузке страницы
+        fetchDataAndRenderChart();
+      });
+    </script>
+  </body>
+</html>
